@@ -1,3 +1,7 @@
+## 0.2 (2011-06-09)
+
+* German localization
+
 ## 0.1.0 (2011-01-25)
 
 * First release
