@@ -10,7 +10,7 @@ Checkout into plugin directory.
 
 Usage Example
 -------------
-### Helper 
+### Helper ###
 
 Include helper in the Controller:
 
@@ -19,7 +19,7 @@ Include helper in the Controller:
 	);
 
 
-### Behavior
+### Behavior ###
 
 Attach Behavior. E.g. dynamically in Controller:
 
@@ -29,13 +29,14 @@ Attach Behavior. E.g. dynamically in Controller:
 				…
 
 
-### Use in View
+### Use in View ###
 
 		 echo $this->SimpleCaptcha->input('User', 
 				 array(
 						 'error' => array(
-								'captchaResultIncorrect' 	=> __('captcha_result_incorrect', true),
-								'captchaResultTooLate' 		=> __('captcha_result_too_late', true),
+								'captchaResultIncorrect' 	=> __d('simple_captcha', 'Captcha result incorrect', true),
+								'captchaResultTooLate' 		=> __d('simple_captcha', 'Captcha result too late', true),
+								'captchaResultTooFast' 		=> __d('simple_captcha', 'Captcha result too fast', true),
 							),
 						 'div' =>  array( 'class' => 'required'),
 						)
