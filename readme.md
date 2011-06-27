@@ -6,7 +6,7 @@ Simple captcha plugin for CakePHP.
 Install
 -------
 
-Checkout into plugin directory.
+Checkout as `simple_captcha` into your plugin directory.
 
 Usage Example
 -------------
