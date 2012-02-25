@@ -3,6 +3,8 @@ SimpleCaptcha for CakePHP
 
 Simple captcha plugin for CakePHP.
 
+See: <https://github.com/Schlaefer/cakephp-simple-captcha>
+
 Install
 -------
 
@@ -14,7 +16,7 @@ Usage Example
 
 Include helper in the Controller:
 
-	plubic $helpers = array (
+	var $helpers = array (
 			'SimpleCaptcha.SimpleCaptcha',
 	);
 
