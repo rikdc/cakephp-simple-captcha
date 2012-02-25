@@ -20,7 +20,7 @@ class SimpleCaptchaHelper extends AppHelper {
 	private $captcha_hash		= null;
 	private $captcha_generated = false;
 
-	function __construct() {
+	function __construct(View $View, $settings = array()) {
 		$this->options = SimpleCaptcha::$defaults;
 
 		# Set up an array with the operators that we want to use. With difficulty=1 it is only subtraction and addition.
@@ -31,7 +31,7 @@ class SimpleCaptchaHelper extends AppHelper {
 			$this->options = array_merge($this->options, $configs);
 		}
 
-		parent::__construct();
+		parent::__construct($View, $settings);
 	}
 
 

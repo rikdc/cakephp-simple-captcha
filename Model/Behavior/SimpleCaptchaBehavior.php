@@ -62,7 +62,7 @@ class SimpleCaptchaBehavior extends ModelBehavior {
 	 * @param type $queryData
 	 * @return bool
 	 */
-	public function beforeValidate(&$Model, &$queryData) {
+	public function beforeValidate($Model, $queryData) {
 		$this->Model = &$Model;
 
 		if (!$this->_validateCaptchaMinTime($this->Model->data[$this->Model->name])) {

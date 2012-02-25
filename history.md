@@ -1,3 +1,7 @@
+## 0.3 (2012-02-25)
+
+* Updated for CakePHP 2.0
+
 ## 0.2 (2011-06-09)
 
 * German localization

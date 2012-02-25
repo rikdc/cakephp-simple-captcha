@@ -14,7 +14,7 @@ Usage Example
 
 Include helper in the Controller:
 
-	var $helpers = array (
+	plubic $helpers = array (
 			'SimpleCaptcha.SimpleCaptcha',
 	);
 
