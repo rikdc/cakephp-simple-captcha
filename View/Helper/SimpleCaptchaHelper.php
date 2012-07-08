@@ -11,7 +11,7 @@ class SimpleCaptchaHelper extends AppHelper {
 	var $helpers = array('Form');
 
 	private $options = null; 
-  private $methods = array('hash', 'db', 'session');
+    private $methods = array('hash', 'db', 'session');
 
 	private $captcha_operator_convert = null;
 

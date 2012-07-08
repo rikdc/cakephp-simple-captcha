@@ -1,0 +1,11 @@
+msgid "Captcha"
+msgstr "Ruslpóstvörn"
+
+msgid "Captcha result incorrect"
+msgstr "Öryggiskóði rangur"
+
+msgid "Captcha result too late"
+msgstr "Öryggiskóði ritaður inn of seint"
+
+msgid "Captcha result too fast"
+msgstr "Öryggiskóði ritaður inn of hratt"
