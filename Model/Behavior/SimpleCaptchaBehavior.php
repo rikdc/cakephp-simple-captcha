@@ -10,19 +10,19 @@ App::import('Lib', 'SimpleCaptcha.SimpleCaptcha');
 class SimpleCaptchaBehavior extends ModelBehavior {
 
 	private $defaults = array(
-			/**
-			 * Minimum time in seconds which is considered necessary for a human to fill the form
-			 * 
-			 * We assume that only a bot is able to fill and answer the form faster.
-			 */
-			'minTime' => 6,
-			/**
-			 * Maximum time in seconds the form is valid.
-			 * 
-			 * Prevents harvesting hashs for later use.
-			 */
-			'maxTime' => 1200,
-			'log' => false,
+		/**
+		 * Minimum time in seconds which is considered necessary for a human to fill the form
+		 * 
+		 * We assume that only a bot is able to fill and answer the form faster.
+		 */
+		'minTime' => 6,
+		/**
+		 * Maximum time in seconds the form is valid.
+		 * 
+		 * Prevents harvesting hashs for later use.
+		 */
+		'maxTime' => 1200,
+		'log' => false,
 	);
 
 	private $methods = array('hash', 'db', 'session');
@@ -34,13 +34,13 @@ class SimpleCaptchaBehavior extends ModelBehavior {
 	//private $types = array('passive','active','both');
 	//private $useSession = false;
 
-	/**
-	 * Setup instance
-	 * 
-	 * @param type $Model
-	 * @param type $settings 
-	 */
-	public function setup(&$Model, $settings) {
+/**
+ * Setup instance
+ * 
+ * @param type $Model
+ * @param type $settings 
+ */
+	public function setup(Model $Model, $settings = array()) {
 		$this->defaults = array_merge(SimpleCaptcha::$defaults, $this->defaults);
 
 		# bootstrap configs
@@ -55,14 +55,14 @@ class SimpleCaptchaBehavior extends ModelBehavior {
 		$this->settings[$Model->alias] = array_merge($this->settings[$Model->alias], (array) $settings);
 	}
 
-	/**
-	 * Callback which initializes all the captcha related checking
-	 * 
-	 * @param type $Model
-	 * @param type $queryData
-	 * @return bool
-	 */
-	public function beforeValidate($Model, $queryData) {
+/**
+ * Callback which initializes all the captcha related checking
+ * 
+ * @param type $Model
+ * @param type $queryData
+ * @return bool
+ */
+	public function beforeValidate(Model $Model) {
 		$this->Model = &$Model;
 
 		if (!$this->_validateCaptchaMinTime($this->Model->data[$this->Model->name])) {
@@ -82,12 +82,12 @@ class SimpleCaptchaBehavior extends ModelBehavior {
 		return true;
 	}
 
-	/**
-	 * Validates the dummy field
-	 * 
-	 * @param array $data
-	 * @return bool 
-	 */
+/**
+ * Validates the dummy field
+ * 
+ * @param array $data
+ * @return bool 
+ */
 	protected function _validateDummyField($data) {
 		$dummyField = $this->settings[$this->Model->alias]['dummyField'];
 		if (!empty($data[$dummyField])) {
@@ -97,12 +97,12 @@ class SimpleCaptchaBehavior extends ModelBehavior {
 		return true;
 	}
 
-	/**
-	 * Validates the minimum time
-	 * 
-	 * @param array $data
-	 * @return bool 
-	 */
+/**
+ * Validates the minimum time
+ * 
+ * @param array $data
+ * @return bool 
+ */
 	protected function _validateCaptchaMinTime($data) {
 		if ($this->settings[$this->Model->alias]['minTime'] <= 0) {
 			return true;
@@ -117,12 +117,12 @@ class SimpleCaptchaBehavior extends ModelBehavior {
 		return false;
 	}
 
-	/**
-	 * validates maximum time
-	 * 
-	 * @param array $data
-	 * @return bool 
-	 */
+/**
+ * validates maximum time
+ * 
+ * @param array $data
+ * @return bool 
+ */
 	protected function _validateCaptchaMaxTime($data) {
 		if ($this->settings[$this->Model->alias]['maxTime'] <= 0) {
 			return true;
@@ -136,16 +136,16 @@ class SimpleCaptchaBehavior extends ModelBehavior {
 		return false;
 	}
 
-	/**
-	 * Validates captcha calculation 
-	 * 
-	 * flood protection by false fields and math code
-	 * TODO: build in floodProtection (max Trials etc)
-	 * TODO: SESSION based one as alternative
-	 *
-	 * @param array $data
-	 * @return bool 
-	 */
+/**
+ * Validates captcha calculation 
+ * 
+ * flood protection by false fields and math code
+ * TODO: build in floodProtection (max Trials etc)
+ * TODO: SESSION based one as alternative
+ *
+ * @param array $data
+ * @return bool 
+ */
 	protected function _validateCaptcha($data) {
 		if (!isset($data['captcha'])) {
 			# form inputs missing? SPAM!
@@ -165,26 +165,26 @@ class SimpleCaptchaBehavior extends ModelBehavior {
 		return $this->error('Captcha incorrect', 'SubmittedResult = \'' . $data['captcha'] . '\'');
 	}
 
-	/**
-	 * return error message (or empty string if none)
-	 * @return string
-	 */
+/**
+ * return error message (or empty string if none)
+ * @return string
+ */
 	public function errors() {
 		return $this->error;
 	}
 
-	/**
-	 * only neccessary if there is more than one request per model
-	 * 2009-12-18 ms
-	 */
+/**
+ * only neccessary if there is more than one request per model
+ * 2009-12-18 ms
+ */
 	public function reset() {
 		$this->error = '';
 	}
 
-	/**
-	 * build and log error message
-	 * 2009-12-18 ms
-	 */
+/**
+ * build and log error message
+ * 2009-12-18 ms
+ */
 	private function error($msg = null, $internalMsg = null) {
 		if (!empty($msg)) {
 			$this->error = $msg;
@@ -199,12 +199,12 @@ class SimpleCaptchaBehavior extends ModelBehavior {
 		return false;
 	}
 
-	/**
-	 * logs attempts
-	 * @param bool errorsOnly (only if error occured, otherwise always)
-	 * @returns null if not logged, true otherwise
-	 * 2009-12-18 ms
-	 */
+/**
+ * logs attempts
+ * @param bool errorsOnly (only if error occured, otherwise always)
+ * @returns null if not logged, true otherwise
+ * 2009-12-18 ms
+ */
 	private function logAttempt($errorsOnly = true) {
 		if ($errorsOnly === true && empty($this->error) && empty($this->internalError)) {
 			return null;
@@ -221,6 +221,4 @@ class SimpleCaptchaBehavior extends ModelBehavior {
 		$this->log($msg, 'captcha');
 		return true;
 	}
-
 }
-?>
